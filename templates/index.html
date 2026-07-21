@@ -1,0 +1,137 @@
+<html>
+	<head>
+		<title>Home</title>
+
+		<link rel="icon" href="Images\icon.jpeg" type="image/icon type" style="border-radius: 100px;">
+		<link rel="stylesheet" type="text/css" href="static\css\index.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+		<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&amp;display=swap" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+		
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+		<script src="static\javascript\index.js"></script>
+	</head>
+
+	<body>
+		<div class="HomePicture">
+			
+			<div class="header">
+				<a id="pvc" href="#">Privacy Policy</a>
+				<a id="tnc" href="#">Terms &amp; Conditions</a>
+			</div>
+
+			<div class="logobar">
+				<a href="index.html"><img src="static\assets\Images\arecanut.png" width="250" height="180"></a>
+				<p class="logotitle">NutClassifyX</p>
+				<p class="logosubtitle">--------------------------------------------------------------------------------------<br><b>The Arecanut Chronicles: Unveiling its Category</b></p>
+			</div>
+			<div class="nav">
+				<ul class="menubar">
+					<li><a href="#">Home</a></li>
+					<li><a href="#" onclick="openAboutUS()">About Us</a></li>
+					<li><a href="#" onclick="openContactForm()">Contact</a></li>
+				</ul>
+			</div>
+
+			<marquee direction="left" scrollamount="15">
+				Welcome to our NutClassify<b>X</b> Website! 
+				We provide high-quality arecanut grading services. 
+				Contact us today to learn more.
+				</marquee>
+				
+
+				<div class="webbody">
+					<form action="/predict" method="post" enctype="multipart/form-data" id="myForm">
+						<h3>Upload Image</h3>
+						<input type="file" accept=".png,.jpg,.jpeg,.heic" id="photo-upload" name="photo"  onchange="previewImage(); clearImage(); ">
+						<img id="photo-preview">
+						<div class="BUTTONS">
+							<!-- <button type="submit" class="SMbtn" id="submit-button" onclick="return validateForm()">Submit</button> -->
+							<button type="submit" class="SMbtn" id="submit-button" onclick="onSubmit()">Submit</button>
+							<button type="button" class="SMbtn" id="reset-button" onclick="confirmReset()">Reset</button> 
+						</div>
+					</form>
+
+					<div id="loading-animation" class="loading-animation hidden" style="display: none;">
+						<!-- Add loading animation here -->
+					  </div>
+					
+
+			
+					  <form class="displayedForm">	
+							{% if finalResult %}
+								<h3 id="final-result">{{ finalResult }}</h3><br>
+								<h5 id="full-final-result">[ {{ fullfinalResult }} ]</h5><br>
+								<img id="final-result-image" src="data:image/png;base64,{{ imgData }}" onload="displayFinalResult()">
+							{% endif %}
+
+							{% if errorMessage %}
+								<script>
+									/*alert("{{ errorMessage }}");*/
+									Swal.fire({
+										icon: 'error',
+										title: 'Oops...',
+										text: 'Not an arecanut Image',
+									})
+
+								</script>
+							{% endif %}
+					</form>	
+				</div>
+		</div>
+
+
+		<div id="contact" class="contact-form">
+			<h2>Contact Us</h2>
+			<form class="contactUs-form">
+				<label for="name">Name :</label>
+				<input type="text" id="name" name="name" required>
+				<label for="email">To :</label>
+				<select id="email">
+					<option value="gouthamamin@gmail.com">gouthamamin@gmail.com</option>
+					<option value="shettyadarsh111@gmail.com">shettyadarsh111@gmail.com</option>
+					<option value="dishansuvarna037@gmail.com">dishansuvarna037@gmail.com</option>
+					<option value="rishikaanchanuchila@gmail.com">rishikaanchanuchila@gmail.com</option>
+				  </select>
+				  <label for="name">Subject :</label>
+				  <input type="text" id="subject" name="subject" required>
+				  <label for="body">Body :</label>
+				  <textarea id="body" name="body" required></textarea> <!--style="resize: vertical;"-->
+				<button type="submit" class="Sendbtn" id="button" onclick="sendEmail()">Send Message</button>
+			</form>
+
+			<a href="#" id="CB" class="close-button" onclick="closeContact()">Close</a>
+		</div>
+
+
+		<div id="aboutUs" class="about-us">
+			<h2>About Us</h2>
+				<h5>
+					The project aims to develop a machine learning-based system that can classify 
+					and grade arecanut automatically based on its size, colour, texture, and taste. 
+					The proposed system will use image processing techniques to extract features from 
+					the arecanut images and then use machine learning algorithmsto classify and grade
+					them. The system will be trained using a dataset of arecanut images that have 
+					already been classified and graded by experts. The proposed system has several 
+					advantages over the traditional manual method of arecanut classification and grading, 					 
+					including accuracy, efficiency, and the elimination of human errors and biases. 
+					This system will be a significant contribution to the arecanut industry by enabling 
+					it to maintain consistent quality,resulting in increased customer satisfaction and higher 
+					profits.
+				</h5>
+			<a href="#" id="CBA" class="close-button" onclick="closeAbout()">Close</a>
+		</div>
+
+									
+		<div class="footer">
+			<div class="container">
+				<hr>
+				<p class="copyright">Copyright &copy;  2023_Final_Year_Project_B.E</p>
+			</div>
+		</div>
+
+	</body>
+</html>
